@@ -1,0 +1,44 @@
+[project]
+name = "pymhd"
+version = "0.1.1"
+dependencies = [
+  "numpy>=2.0",
+  "jax>=0.6",
+  "yt>=4.4",
+  "h5py>=3.10",
+  "matplotlib>=3.10",
+  "kdepy>=1.1",
+]
+authors = [
+  { name="Yuyang Hua (华宇阳)", email="yuyanghua@stu.pku.edu.cn" },
+]
+description = "A Python package for post-processing MHD turbulence simulations"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICENSE"]
+
+[project.urls]
+Homepage = "https://github.com/PlasmaHua/PyMHD"
+Repository = "https://github.com/PlasmaHua/PyMHD.git"
+Issues = "https://github.com/PlasmaHua/PyMHD/issues"
+
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pymhd"]
+
+[tool.hatch.build.targets.sdist]
+only-include = [
+  "pymhd",
+  "tests",
+  "README.md",
+  "LICENSE",
+  "pyproject.toml",
+]

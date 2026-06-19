@@ -9,8 +9,6 @@ pymhd/__init__.py
 Unified interface for PyMHD.
 """
 
-__version__ = "0.1.0"
-
 from .turbulence import Scalar, Vector, ScalarField, VectorField, Turbulence, avg, std
 from .derivatives.derivative import Dx, Dy, Dz, grad, div, curl, laplacian, Algorithm
 

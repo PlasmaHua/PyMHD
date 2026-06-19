@@ -8,7 +8,7 @@ pymhd/derivatives/WENO.py
 
 Implements the WENO5-Z and WENO7-Z reconstruction schemes with two backends:
     - NumPy (default): more compatible, but limited to a single CPU core
-    - JAX: requires JAX, but leverages multi-core CPU and GPU acceleration
+    - JAX: requires JAX, but leverages multi-core CPU and (future) GPU acceleration
 """
 
 from typing import Any
@@ -23,7 +23,11 @@ try:
     jax.config.update("jax_enable_x64", True)
 
     from jax.sharding import Mesh, NamedSharding, PartitionSpec as P
-    jax.config.update("jax_num_cpu_devices", 8)
+    try:
+        jax.config.update("jax_num_cpu_devices", 8)
+    except RuntimeError:
+        # In some JAX versions, re-setting this after backend init raises.
+        pass
 
     mesh: Mesh = jax.make_mesh(axis_shapes=(4, 2), axis_names=("X", "Y"))
 
