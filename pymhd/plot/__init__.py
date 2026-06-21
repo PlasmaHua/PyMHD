@@ -16,6 +16,7 @@ from ..spectra import EnergySpectra
 
 from .nd import plot as plotNumericalDissipation
 from .spc import plot as plotSpectra
+from .slc import plot2dslice
 
 def plot(obj: NumericalDissipation | EnergySpectra, **kwargs) -> None:
     """Unified plot function for PyMHD

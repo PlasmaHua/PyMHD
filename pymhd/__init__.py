@@ -16,7 +16,7 @@ from .spectra import Spectrum, Spectrum1D, EnergySpectra
 from .numdiss import NumericalDissipation
 from .preprocess import output2turbulence
 
-from .plot import plot
+from .plot import plot, plot2dslice
 
 __all__ = [
     "Scalar", "Vector",
@@ -27,5 +27,5 @@ __all__ = [
     "EnergySpectra",
     "NumericalDissipation",
     "output2turbulence",
-    "plot",
+    "plot", "plot2dslice",
 ]
