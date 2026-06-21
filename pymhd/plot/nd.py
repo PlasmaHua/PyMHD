@@ -1500,10 +1500,8 @@ def plot(
     fraction  : float in (0, 1], passed to slice colormap scaling (see plotSlices).
     """
     print("═════════ Result Visualization ═════════\n")
-    print(f"Plotting dissipation term slices ...")
+    print(f"Plotting dissipation terms ...")
     plotSlices(nd, fraction=fraction)
-
-    print(f"Plotting histograms of numerical dissipation ...")
     plotHistogram(nd)
 
     print("Plotting dissipation spectra ...")
@@ -1516,4 +1514,4 @@ def plot(
 
     plotSpectra(nd, spc)
 
-    print(f"All plots completed! Numerical dissipation analysis done.")
+    print(f"All plots completed! Results saved to ./{Path(nd.outputdir)}/")

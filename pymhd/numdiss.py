@@ -279,7 +279,7 @@ class NumericalDissipation:
             Vdot = average2center(Vdot)
 
             end_time = time.time()
-            print(f"rho, p, V, Vdot converted! Time: {end_time - start_time:.2f} s\n")
+            print(f"rho, p, V, Vdot converted! Elapsed time: {end_time - start_time:.2f} s\n")
 
         print(f"Computing numerical dissipation terms...")
         start_time = time.time()
@@ -416,7 +416,7 @@ class NumericalDissipation:
             )
 
         end_time = time.time()
-        print(f"Numerical dissipation computation completed! Time: {end_time - start_time:.2f} s")
+        print(f"Computation of numerical dissipation completed! Elapsed time: {end_time - start_time:.2f} s")
 
         numVisRate = V @ numVisTerm
         VdotStress = V @ divStressT

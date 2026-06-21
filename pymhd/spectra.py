@@ -23,6 +23,8 @@ import pickle
 from collections import UserList
 from typing import Literal
 
+import time
+
 from .turbulence import Turbulence, VectorField
 
 class Spectrum:
@@ -205,6 +207,8 @@ class EnergySpectra:
 
     def __init__(self, turbulence: Turbulence) -> None:
 
+        start_time = time.time()
+
         self.type = turbulence.type
         self.nu   = turbulence.nu
         self.eta  = turbulence.eta
@@ -241,6 +245,9 @@ class EnergySpectra:
             self.xEmag, self.yEmag, self.zEmag, self.totEmag = computeEnergySpectra(turbulence.Bs)
         else:
             self.xEmag, self.yEmag, self.zEmag, self.totEmag = None, None, None, None
+
+        end_time = time.time()
+        print(f"Computation of turbulent spectra completed! Elapsed time: {end_time - start_time:.2f} s")
 
         self.cache(Path("spectra") / "spectra.pkl")
 

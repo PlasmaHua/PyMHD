@@ -247,3 +247,5 @@ def plot(spc: EnergySpectra) -> None:
     # plot anisotropic spectra for MRI-driven turbulence
     if spc.type == "MRI":
         plotAnisotropic(spc, outdir=outdir)
+
+    print(f"Visualization of turbulent spectra completed! Results saved to ./{outdir}/")

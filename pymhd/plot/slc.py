@@ -21,6 +21,8 @@ from matplotlib.colors import LogNorm, Normalize
 
 from pathlib import Path
 
+import time
+
 from ..turbulence import Turbulence
 
 # Font: Computer Modern
@@ -627,7 +629,7 @@ def plotMRITurbulence(
 
 def plot2dslice(
     turbulence: Turbulence,
-    fraction: float = 1.0,
+    fraction  : float = 1.0,
 ) -> None:
     """Plot 2D slices of turbulence
 
@@ -638,11 +640,14 @@ def plot2dslice(
     turbulence: Turbulence object
     fraction  : float in (0, 1]. Proportion of data in color range; default 1.0 = full range.
     """
+    if turbulence.type not in ('MRI', 'SSD', 'Bx', 'Bz', 'hydro'):
+        raise ValueError(f"Unsupported turbulence type: {turbulence.type}")
+
     if turbulence.type == 'MRI':
         plotMRITurbulence(turbulence, fraction=fraction)
-    elif turbulence.type in ('SSD', 'Bx', 'Bz'):
+    if turbulence.type in ('SSD', 'Bx', 'Bz'):
         plotForcedTurbulence(turbulence, fraction=fraction)
-    elif turbulence.type == 'hydro':
+    if turbulence.type == 'hydro':
         plotHydroTurbulence(turbulence, fraction=fraction)
-    else:
-        raise ValueError(f"Unsupported turbulence type: {turbulence.type}")
+        
+    print("Visualization of 2D slices completed! Results saved to ./slices/")

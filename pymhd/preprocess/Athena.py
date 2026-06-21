@@ -842,6 +842,6 @@ def output2turbulence(
     )
 
     end_time = timer.time()
-    print(f"Turbulence object constructed! Total time: {end_time - start_time:.2f} s\n")
+    print(f"Turbulence object constructed! Elapsed time: {end_time - start_time:.2f} s\n")
 
     return turbulence
