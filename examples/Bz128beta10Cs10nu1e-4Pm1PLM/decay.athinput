@@ -1,0 +1,12 @@
+<turb_driving>
+driving_type = 0      # 0: isotropic, 1: anisotropic
+tcorr = 0.01          # ~ L / 2 pi urms, tcorr <= 1e-6 yields delta-in-time forcing without OU process
+dedt  = 0.0           # ~ urms^3 / 2 L
+nlow  = 1
+nhigh = 2
+
+<output4>
+file_type  = bin         # binary output file
+variable   = mhd_w_bcc   # variables to be output
+id         = decay       # filename = '<basename>.<id>.0000*.<file_type>'
+dt         = 0.01        # time increment between outputs

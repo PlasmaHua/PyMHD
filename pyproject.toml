@@ -1,6 +1,6 @@
 [project]
 name = "pymhd"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
   "numpy>=2.0",
   "jax>=0.6",

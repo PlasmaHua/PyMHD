@@ -1,0 +1,78 @@
+# AthenaK input file for magnetohydrodynamic (MHD) turbulence
+
+<comment>
+problem   = turbulence
+
+<job>
+basename  = Turb      # problem ID: basename of output filenames
+
+<mesh>
+nghost    = 2         # Number of ghost cells
+nx1       = 128       # Number of zones in X1-direction
+x1min     = -0.5      # minimum value of X1
+x1max     = 0.5       # maximum value of X1
+ix1_bc    = periodic  # Inner-X1 boundary condition flag
+ox1_bc    = periodic  # Outer-X1 boundary condition flag
+
+nx2       = 128       # Number of zones in X2-direction
+x2min     = -0.5      # minimum value of X2
+x2max     = 0.5       # maximum value of X2
+ix2_bc    = periodic  # Inner-X2 boundary condition flag
+ox2_bc    = periodic  # Outer-X2 boundary condition flag
+
+nx3       = 128       # Number of zones in X3-direction
+x3min     = -0.5      # minimum value of X3
+x3max     = 0.5       # maximum value of X3
+ix3_bc    = periodic  # Inner-X3 boundary condition flag
+ox3_bc    = periodic  # Outer-X3 boundary condition flag
+
+<meshblock>
+nx1       = 16        # Number of cells in each MeshBlock, X1-dir
+nx2       = 16        # Number of cells in each MeshBlock, X2-dir
+nx3       = 16        # Number of cells in each MeshBlock, X3-dir
+
+<time>
+evolution  = dynamic  # dynamic
+integrator = rk2      # time integrator, opts: rk1: Euler, rk2: Heun, rk3: SSPRK (3,3)
+                      #                        rk4: RK4()4[2S], non-SSP, Ketcheson (2010)
+cfl_number = 0.3      # The Courant, Friedrichs, & Lewy (CFL) Number
+nlim       = -1       # cycle limit, '-1' represents None
+tlim       = 10       # time limit
+ndiag      = 1        # cycles between diagostic output
+
+<mhd>
+eos               = isothermal   # EoS, opts: ideal, isothermal
+gamma             = 1.6666666667
+iso_sound_speed   = 10.0
+
+reconstruct       = plm          # reconstruction, opts: dc, plm, ppm4, ppmx, wenoz
+rsolver           = hlld         # Riemann solver, opts: llf, hlle, hlld
+
+ohmic_resistivity = 0.0001       # Ohmic resistivity \eta
+viscosity         = 0.0001       # viscosity coefficient \nu
+
+<problem>
+d_i    = 1.0          # ion density, corresponding to fluid density in MHD simulation
+ifield = 2            # 1 for zero-net-flux Bz, 2 for constant Bz
+beta   = 10           # plasma beta
+
+<turb_driving>
+driving_type = 0      # 0: isotropic, 1: anisotropic
+tcorr = 0.5           # ~ L / 2 pi urms
+dedt  = 0.1           # ~ urms^3 / 2 L
+nlow  = 1
+nhigh = 2
+
+<output1>
+file_type = hst
+dt        = 0.01
+
+<output2>
+file_type  = bin         # binary output file
+variable   = mhd_w_bcc   # variables to be output
+id         = prim        # filename = '<basename>.<id>.0000*.<file_type>'
+dt         = 0.5         # time increment between outputs
+
+<output3>
+file_type  = rst         # restart file
+dt         = 2.0         # time increment between outputs

@@ -1,0 +1,5 @@
+<output5>
+file_type  = bin         # binary output file
+variable   = mhd_w_bcc   # variables to be output
+id         = nd          # filename = '<basename>.<id>.0000*.<file_type>'
+dcycle     = 1           # cycle increment between outputs
