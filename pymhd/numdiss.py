@@ -200,7 +200,7 @@ class NumericalDissipation:
         self.outputdir = self.alg2dir(algorithm)
 
         # if cache exists, load it
-        path = Path(self.outputdir) / "cache.pkl"
+        path = Path(self.outputdir) / "nd.pkl"
         if self.load(path):
             return
 
@@ -595,4 +595,4 @@ class DissipationSpectra:
             self.xBLapB, self.yBLapB, self.zBLapB = xBLapB, yBLapB, zBLapB
             self.eUdivT, self.eBLapB = eUdivT, eBLapB
 
-        self.cache(Path(nd.outputdir) / "nd.spectra.pkl")
+        self.cache(Path(nd.outputdir) / "ds.pkl")

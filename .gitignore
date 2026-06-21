@@ -219,3 +219,9 @@ __marimo__/
 
 # macOS
 .DS_Store
+
+# Cache and .athdf files
+examples/*/numdiss(*)/nd.pkl
+examples/*/numdiss(*)/ds.pkl
+examples/*/spectra/spectra.pkl
+examples/*/outputs/athdf/

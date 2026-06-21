@@ -39,7 +39,7 @@ def test(args):
 
     try:
         algorithm = Algorithm(method, stencil, CT)
-        cache = Path(NumericalDissipation.alg2dir(algorithm)) / "cache.pkl"
+        cache = Path(NumericalDissipation.alg2dir(algorithm)) / "nd.pkl"
 
         if cache.is_file():
             try:
