@@ -8,7 +8,7 @@ pymhd/derivatives/compact.py
 
 Implements the TCS-M scheme:
     - TCS-M: Targeted Compact Scheme with Multi-stencil Discontinuity Detectors (MSDD)
-    - Ref: Lele 1992 JCP, Jiang 2000 IJCFD
+    - Ref: https://arxiv.org/abs/2606.22506
     - Currently only supports JAX implementation
 """
 

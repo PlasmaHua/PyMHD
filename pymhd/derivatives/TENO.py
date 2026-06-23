@@ -9,6 +9,8 @@ pymhd/derivatives/TENO.py
 Implements the TENO7-M reconstruction scheme with two backends:
     - NumPy (default): more compatible, but limited to a single CPU core
     - JAX: requires JAX, but leverages multi-core CPU and (future) GPU acceleration
+
+See the method paper (https://arxiv.org/abs/2606.22506) for details
 """
 
 from typing import Any

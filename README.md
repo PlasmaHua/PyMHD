@@ -1,5 +1,6 @@
 # PyMHD
 
+[![PyPI](https://img.shields.io/pypi/v/pymhd.svg)](https://pypi.org/project/pymhd/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20749062.svg)](https://doi.org/10.5281/zenodo.20749062)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/PlasmaHua/PyMHD/blob/main/LICENSE)
 
@@ -8,7 +9,7 @@ A Python package for post-processing magnetohydrodynamic (MHD) turbulence simula
 
 ## Features
 
-- [x] High-fidelity ***a posteriori* estimation and visualization of numerical dissipation** in MHD turbulence simulations
+- [x] High-fidelity ***a posteriori* estimation and visualization of numerical dissipation** in MHD turbulence simulations, see our method paper ([arXiv:2606.22506](https://arxiv.org/abs/2606.22506)) for details
 - [x] Computation and visualization of turbulent energy spectra
 - [x] Visualization of 2D slices of MHD variables
 - [x] Built-in support for simulations from the Athena family, including [Athena++](https://github.com/PrincetonUniversity/athena), [AthenaK](https://github.com/IAS-Astrophysics/athenak), and [AthenaPK](https://github.com/parthenon-hpc-lab/athenapk)
@@ -23,7 +24,7 @@ A Python package for post-processing magnetohydrodynamic (MHD) turbulence simula
 
 ### Installation
 
-Install PyMHD from [PyPI](https://pypi.org/) with:
+Install PyMHD from [PyPI](https://pypi.org/project/pymhd/) with:
 
 ```bash
 pip install pymhd
@@ -65,7 +66,7 @@ Under construction.
 If PyMHD contributes to your work, please consider citing the package using the following BibTeX entry:
 
 ```bibtex
-@misc{Hua2026,
+@misc{Hua2026PyMHD,
   doi = {10.5281/zenodo.20749062},
   url = {https://zenodo.org/doi/10.5281/zenodo.20749062},
   author = {Hua, Yuyang},
@@ -73,5 +74,19 @@ If PyMHD contributes to your work, please consider citing the package using the 
   publisher = {Zenodo},
   year = {2026},
   copyright = {MIT License}
+}
+```
+
+If your work employs the proposed framework for numerical dissipation estimation, please cite our [method paper](https://arxiv.org/abs/2606.22506):
+
+```bibtex
+@misc{Hua2026nd,
+  title = {Characterization of Numerical Dissipation in Simulations of Magnetohydrodynamic Turbulence}, 
+  author = {Yuyang Hua and Zhonghai Zhao and Bin Qiao},
+  year = {2026},
+  eprint = {2606.22506},
+  archivePrefix = {arXiv},
+  primaryClass = {physics.plasm-ph},
+  url = {https://arxiv.org/abs/2606.22506}, 
 }
 ```
