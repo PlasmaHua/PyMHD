@@ -45,17 +45,17 @@ For a quick start, clone the source repository:
 git clone https://github.com/PlasmaHua/PyMHD.git
 ```
 
-Alternatively, download the source code from the [GitHub releases page](https://github.com/PlasmaHua/PyMHD/releases). Then navigate to the `./examples` subdirectory with `cd PyMHD/examples`, where two AthenaK simulation examples are provided.
+Note that cloning the repository may take a while, as the `examples` directory contains roughly 2.4 GB of AthenaK `.bin` output files. Alternatively, you can manually download the source code from the [GitHub releases page](https://github.com/PlasmaHua/PyMHD/releases). Then navigate to the `examples` directory with `cd PyMHD/examples`, where two AthenaK simulation examples are provided.
 
-Each directory in [`PyMHD/examples`](https://github.com/PlasmaHua/PyMHD/tree/main/examples) contains a Python script, [`quick.py`](https://github.com/PlasmaHua/PyMHD/tree/main/examples/Bz128beta10Cs10nu1e-4Pm1PLM/quick.py), that demonstrates basic usage of PyMHD, including:
-- Extracting a PyMHD `Turbulence` object from output files with the `pymhd.output2turbulence` function
-- Calculating turbulent energy spectra with the PyMHD `EnergySpectra` class
-- Estimating numerical dissipation *a posteriori* with the PyMHD `NumericalDissipation` class
+Each subdirectory in [`PyMHD/examples`](https://github.com/PlasmaHua/PyMHD/tree/main/examples) contains a Python script, [`quick.py`](https://github.com/PlasmaHua/PyMHD/tree/main/examples/Bz128beta10Cs10nu1e-4Pm1PLM/quick.py), that demonstrates basic usage of PyMHD, including:
+- Extracting a PyMHD `Turbulence` object from AthenaK output files with the `pymhd.output2turbulence` function
+- Calculating turbulent energy spectra using the PyMHD `EnergySpectra` class
+- Estimating numerical dissipation *a posteriori* using the PyMHD `NumericalDissipation` class
 - Visualizing turbulent spectra and numerical dissipation with the `pymhd.plot` module
 
 ### Analyze Your Own Athena Simulations
 
-PyMHD natively supports simulations from Athena++, AthenaK, and AthenaPK. Following the examples in [`PyMHD/examples`](https://github.com/PlasmaHua/PyMHD/tree/main/examples), use the `pymhd.output2turbulence` function to extract output data and input-file metadata, then construct a PyMHD `Turbulence` object for further analysis.
+PyMHD natively supports simulations from Athena++, AthenaK, and AthenaPK. Following the examples in [`PyMHD/examples`](https://github.com/PlasmaHua/PyMHD/tree/main/examples), use the `pymhd.output2turbulence` function to  automatically extract output data and input-file metadata, then construct a PyMHD `Turbulence` object for further analysis.
 
 ## API Documentation
 
