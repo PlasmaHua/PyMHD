@@ -15,9 +15,9 @@ A Python package for post-processing magnetohydrodynamic (MHD) turbulence simula
 - [x] Built-in support for simulations from the Athena family, including [Athena++](https://github.com/PrincetonUniversity/athena), [AthenaK](https://github.com/IAS-Astrophysics/athenak), and [AthenaPK](https://github.com/parthenon-hpc-lab/athenapk)
 - [x] Support for **driven MHD turbulence** (e.g., Alfvénic turbulence and small-scale dynamos), driven hydrodynamic turbulence, and **MRI-driven turbulence** (from shearing-box simulations) with triply periodic boundary conditions
 - [x] Support for adiabatic and isothermal equations of state (EoS); TODO: add support for incompressible EoS
+- [x] Parallel acceleration on (single-node) multi-core CPUs powered by JAX; TODO: support acceleration on GPUs and multi-node CPUs
 - [ ] TODO: Computation and visualization of correlation functions
-- [ ] TODO: Spectral energy transfer analysis following [Grete, Philipp, et al. Physics of Plasmas 24.9 (2017)](https://doi.org/10.1063/1.4990613)
-- [ ] TODO: JAX acceleration on GPUs and multi-node CPUs (currently, certain algorithms support parallelism on single-node, multi-core CPUs)
+- [ ] TODO: Spectral energy transfer analysis following [Philipp Grete et al. Physics of Plasmas 24.9 (2017)](https://doi.org/10.1063/1.4990613)
 
 
 ## Quick Start
@@ -47,7 +47,45 @@ git clone https://github.com/PlasmaHua/PyMHD.git
 
 Note that cloning the repository may take a while, as the `examples` directory contains roughly 2.4 GB of AthenaK `.bin` output files. Alternatively, you can manually download the source code from the [GitHub releases page](https://github.com/PlasmaHua/PyMHD/releases). Then navigate to the `examples` directory with `cd PyMHD/examples`, where two AthenaK simulation examples are provided.
 
-Each subdirectory in [`PyMHD/examples`](https://github.com/PlasmaHua/PyMHD/tree/main/examples) contains a Python script, [`quick.py`](https://github.com/PlasmaHua/PyMHD/tree/main/examples/Bz128beta10Cs10nu1e-4Pm1PLM/quick.py), that demonstrates basic usage of PyMHD, including:
+Each subdirectory under [`PyMHD/examples`](https://github.com/PlasmaHua/PyMHD/tree/main/examples) includes a `quick.py` script, such as [`Bz128beta10Cs10nu1e-4Pm1PLM/quick.py`](https://github.com/PlasmaHua/PyMHD/tree/main/examples/Bz128beta10Cs10nu1e-4Pm1PLM/quick.py):
+```python
+import pymhd as mhd
+
+from pymhd import Turbulence, EnergySpectra, NumericalDissipation, Algorithm
+from pymhd import output2turbulence as o2t
+
+inputfile = "turb.athinput"
+outputs = "outputs/bin/Turb.prim.*.bin"
+
+turbulence: Turbulence = o2t(
+    code      = "Athena", 
+    outputs   = outputs, 
+    inputfile = inputfile,
+    t1        = 8.0,
+    t2        = 10.0,
+)
+
+spectra = EnergySpectra(turbulence=turbulence)
+
+mhd.plot2dslice(turbulence, fraction=1.0)
+mhd.plot(spectra)
+
+outputs = "outputs/bin/Turb.nd.*.*.bin"
+
+turbulence: Turbulence = o2t(
+    code      = "Athena", 
+    outputs   = outputs, 
+    inputfile = inputfile,
+)
+
+nd = NumericalDissipation(
+    turbulence = turbulence,
+    algorithm  = Algorithm(method="TENO", stencil=7, CT=0.01),
+)
+
+mhd.plot(nd, fraction=0.99)
+```
+This script demonstrates the basic usage of PyMHD, including:
 - Extracting a PyMHD `Turbulence` object from AthenaK output files with the `pymhd.output2turbulence` function
 - Calculating turbulent energy spectra using the PyMHD `EnergySpectra` class
 - Estimating numerical dissipation *a posteriori* using the PyMHD `NumericalDissipation` class
