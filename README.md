@@ -93,9 +93,58 @@ This script demonstrates the basic usage of PyMHD, including:
 
 ### Analyze Your Own Athena Simulations
 
-PyMHD natively supports simulations from Athena++, AthenaK, and AthenaPK. Following the examples in [`PyMHD/examples`](https://github.com/PlasmaHua/PyMHD/tree/main/examples), use the `pymhd.output2turbulence` function to  automatically extract output data and input-file metadata, then construct a PyMHD `Turbulence` object for further analysis.
+PyMHD natively supports simulations from Athena++, AthenaK, and AthenaPK. Following the above examples, use the `pymhd.output2turbulence` function to  automatically extract output data and input-file metadata, then construct a PyMHD `Turbulence` object for further analysis.
 
 ## API Documentation
+
+PyMHD adopts an object-oriented design, providing the `ScalarField` and `VectorField` classes to represent scalar and vector fields, respectively. Built on top of these classes, the `Turbulence` class organizes data from MHD turbulence simulations and serves as the foundation for PyMHD's post-processing pipeline.
+
+### `ScalarField` and `VectorField`
+
+The core attributes of the `ScalarField` class are:
+- `box`: a tuple of three floating-point values `(Lx, Ly, Lz)` that defines the simulation box size
+- `data`: a 3D NumPy array containing the scalar values on the numerical grid
+- `Nx, Ny, Nz`: the simulation resolution, inferred from the shape of `data`
+
+A `ScalarField` instance can be created as follows:
+```python
+scalarfield = ScalarField(data: np.ndarray, box: tuple[float, float, float])
+```
+
+The core attributes of the `VectorField` class are:
+- `box`: a tuple of three floating-point values `(Lx, Ly, Lz)` that defines the simulation box size
+- `x, y, z`: three 3D NumPy arrays containing the vector components
+- `Nx, Ny, Nz`: the simulation resolution, inferred from the shapes of `x`, `y`, and `z`
+
+A `VectorField` instance can be created as follows:
+```python
+vectorfield = VectorField(
+  x  : np.ndarray,
+  y  : np.ndarray,
+  z  : np.ndarray,
+  box: tuple[float, float, float],
+)
+```
+
+PyMHD implements common operations on `ScalarField` and `VectorField` objects, including dot product $\cdot$, cross product $\times$, gradient $\nabla$, divergence $\nabla\cdot$, and curl $\nabla\times$, among other operations. The following example illustrates the basic usage:
+
+```python
+from pymhd import ScalarField, VectorField
+from pymhd import grad, div, curl, laplacian
+
+box = 1.0, 1.0, 1.0
+B = VectorField(Bx, By, Bz, box) # Arrays such as Bx are omitted for brevity.
+V = VectorField(Vx, Vy, Vz, box) # Arrays such as Vx are omitted for brevity.
+Bdot = VectorField(Bdotx, Bdoty, Bdotz, box) # Arrays such as Bdotx are omitted for brevity.
+
+Faraday    = curl(V ** B) # Faraday term in the MHD induction equation
+LaplacianB = laplacian(B) 
+
+phyResTerm = eta * LaplacianB # Physical resistive dissipation term
+numResTerm = Bdot - Faraday - phyResTerm # Estimated numerical resistive dissipation term
+```
+
+### `Turbulence`
 
 Under construction.
 
@@ -120,7 +169,7 @@ If your work employs the proposed framework for numerical dissipation estimation
 ```bibtex
 @misc{Hua2026nd,
   title = {Characterization of Numerical Dissipation in Simulations of Magnetohydrodynamic Turbulence}, 
-  author = {Yuyang Hua and Zhonghai Zhao and Bin Qiao},
+  author = {Hua, Yuyang and Zhao, Zhonghai and Qiao, Bin},
   year = {2026},
   eprint = {2606.22506},
   archivePrefix = {arXiv},
